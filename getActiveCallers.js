@@ -38,7 +38,6 @@ const getActiveCallers = async () => {
         await driver.get(
             `https://${process.env.INTERNAL_IP}/admin/Admin.html#/monitor/all_status`)
       }catch (e){
-        console.log("here")
         driver = await new Builder().withCapabilities(capabilities)
         .forBrowser('chrome').setChromeOptions(chromeOptions)
         .build();
@@ -112,11 +111,9 @@ const express = require('express')
 const app = express()
 const port = 3080
 
-app.get('/', async (req, res) => {
+app.get('/api', async (req, res) => {
 
-
-
-  let systemResponse = {}
+  let systemResponse
 
   try{
     const htmlResponse = await getActiveCallers()
